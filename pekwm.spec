@@ -1,5 +1,5 @@
 %define	name	pekwm
-%define	version	0.1.5
+%define	version	0.1.6
 %define	rel	1
 %define	release	%mkrel %{rel}
 
@@ -47,7 +47,7 @@ cp -f %SOURCE2 data/mouse
 		--enable-harbour \
 		--disable-debug \
 		--disable-pcre
-		
+
 %make
 
 %install
@@ -87,4 +87,4 @@ EOF
 %config(noreplace) %{_sysconfdir}/pekwm
 %{_bindir}/start%{name}
 %{_bindir}/%{name}
-
+%{_datadir}/man/man1/pekwm.1.lzma
