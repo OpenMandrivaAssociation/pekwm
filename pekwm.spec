@@ -21,7 +21,7 @@ License:	GPL
 Group:		Graphical desktop/Other
 Summary:	A minimalist window manager for the X Window System
 Requires:	xterm
-BuildRequires:	XFree86-devel
+BuildRequires:	X11-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
