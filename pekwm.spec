@@ -1,5 +1,5 @@
 %define	name	pekwm
-%define	version	0.1.7
+%define	version	0.1.9a
 %define	rel	1
 %define	release	%mkrel %{rel}
 
