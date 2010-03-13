@@ -1,13 +1,14 @@
 %define	name	pekwm
-%define	version	0.1.11
+%define	version	0.1.12
+%define beta rc1
 %define	rel	1
-%define	release	%mkrel %{rel}
+%define	release	%mkrel -c %{beta} %{rel}
 
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 URL:		http://pekwm.org/
-Source0:	%{name}-%{version}.tar.bz2
+Source0:	http://www.pekwm.org/projects/pekwm/files/%{name}-%{version}-%{beta}.tar.bz2
 
 # modify config
 Source1:	pekwm_config
@@ -21,7 +22,14 @@ License:	GPL
 Group:		Graphical desktop/Other
 Summary:	A minimalist window manager for the X Window System
 Requires:	xterm
-BuildRequires:	X11-devel
+BuildRequires:	libx11-devel
+BuildRequires:	libxext-devel
+BuildRequires:	libxft-devel
+BuildRequires:	libxinerama-devel
+BuildRequires:	libxpm-devel
+BuildRequires:	libxrandr-devel
+BuildRequires:	jpeg-devel
+BuildRequires:	png-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -33,20 +41,19 @@ window frame, automatic window size, location, grouping
 and title rewriting.
 
 %prep
-%setup -q
+%setup -qn %{name}-%{version}-%{beta}
 
 # modify config
 cp -f %SOURCE1 data/config
 cp -f %SOURCE2 data/mouse
 
 %build
-%configure	--enable-shape \
+autoreconf -fi
+%configure2_5x	--enable-shape \
 		--enable-xinerama \
 		--enable-menus \
-		--enable-keygrabber \
 		--enable-harbour \
-		--disable-debug \
-		--disable-pcre
+		--disable-debug
 
 %make
 
