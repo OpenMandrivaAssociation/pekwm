@@ -1,14 +1,13 @@
 %define	name	pekwm
 %define	version	0.1.12
-%define beta rc1
 %define	rel	1
-%define	release	%mkrel -c %{beta} %{rel}
+%define	release	%mkrel %{rel}
 
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 URL:		http://pekwm.org/
-Source0:	http://www.pekwm.org/projects/pekwm/files/%{name}-%{version}-%{beta}.tar.bz2
+Source0:	http://www.pekwm.org/projects/pekwm/files/%{name}-%{version}.tar.gz
 
 # modify config
 Source1:	pekwm_config
@@ -41,7 +40,7 @@ window frame, automatic window size, location, grouping
 and title rewriting.
 
 %prep
-%setup -qn %{name}-%{version}-%{beta}
+%setup -q
 
 # modify config
 cp -f %SOURCE1 data/config
