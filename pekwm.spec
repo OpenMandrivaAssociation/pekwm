@@ -1,11 +1,6 @@
-%define	name	pekwm
-%define	version	0.1.12
-%define	rel	1
-%define	release	%mkrel %{rel}
-
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		pekwm
+Version:	0.1.12
+Release:	2
 URL:		http://pekwm.org/
 Source0:	http://www.pekwm.org/projects/pekwm/files/%{name}-%{version}.tar.gz
 
@@ -29,7 +24,6 @@ BuildRequires:	libxpm-devel
 BuildRequires:	libxrandr-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	png-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Pekwm is a window manager based on aewm++, but it no longer
@@ -57,23 +51,22 @@ autoreconf -fi
 %make
 
 %install
-%{__rm} -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
 # install themes
-tar -jxf %SOURCE10 -C $RPM_BUILD_ROOT/%{_datadir}/%{name}/themes
-tar -jxf %SOURCE11 -C $RPM_BUILD_ROOT/%{_datadir}/%{name}/themes
+tar -jxf %SOURCE10 -C %{buildroot}/%{_datadir}/%{name}/themes
+tar -jxf %SOURCE11 -C %{buildroot}/%{_datadir}/%{name}/themes
 
 # startfile
-%{__cat} > $RPM_BUILD_ROOT%{_bindir}/start%{name} << EOF
+%{__cat} > %{buildroot}%{_bindir}/start%{name} << EOF
 exec %{_bindir}/%{name}
 EOF
 
-chmod 755 $RPM_BUILD_ROOT%{_bindir}/start%{name}
+chmod 755 %{buildroot}%{_bindir}/start%{name}
 
 # session file
-%{__install} -d $RPM_BUILD_ROOT%{_sysconfdir}/X11/wmsession.d
-%{__cat} > $RPM_BUILD_ROOT%{_sysconfdir}/X11/wmsession.d/30%{name} << EOF
+%{__install} -d %{buildroot}%{_sysconfdir}/X11/wmsession.d
+%{__cat} > %{buildroot}%{_sysconfdir}/X11/wmsession.d/30%{name} << EOF
 NAME=%{name}
 EXEC=%{_bindir}/start%{name}
 DESC=%{name} window manager
@@ -81,11 +74,7 @@ SCRIPT:
 exec %{_bindir}/start%{name}
 EOF
 
-%clean
-%{__rm} -rf $RPM_BUILD_ROOT
-
 %files
-%defattr(-,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/*
@@ -93,4 +82,69 @@ EOF
 %config(noreplace) %{_sysconfdir}/pekwm
 %{_bindir}/start%{name}
 %{_bindir}/%{name}
-%{_datadir}/man/man1/pekwm.1.lzma
+%{_datadir}/man/man1/pekwm.1*
+
+
+%changelog
+* Wed Sep 15 2010 Rémy Clouard <shikamaru@mandriva.org> 0.1.12-1mdv2011.0
++ Revision: 578754
+- bump to final 0.1.12
+
+* Sat Mar 13 2010 Funda Wang <fwang@mandriva.org> 0.1.12-0.rc1.1mdv2010.1
++ Revision: 518738
+- New version 0.1.12 rc1
+
+* Tue May 26 2009 Frederik Himpe <fhimpe@mandriva.org> 0.1.11-1mdv2010.0
++ Revision: 379988
+- Update to new version 0.1.11
+
+* Tue Jan 27 2009 Jérôme Soyer <saispo@mandriva.org> 0.1.10-1mdv2009.1
++ Revision: 334116
+- New upstream release
+
+* Sun Jan 04 2009 Jérôme Soyer <saispo@mandriva.org> 0.1.9a-1mdv2009.1
++ Revision: 324513
+- New upstream release
+
+* Tue Aug 26 2008 Jérôme Soyer <saispo@mandriva.org> 0.1.7-1mdv2009.0
++ Revision: 276172
+- New release
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+    - buildrequires X11-devel instead of XFree86-devel
+
+* Fri Oct 12 2007 Jérôme Soyer <saispo@mandriva.org> 0.1.6-1mdv2008.1
++ Revision: 97353
+- New release 0.1.6
+- import pekwm
+
+
+* Mon Apr 18 2006 UTUMI Hirosi <utuhiro78@yahoo.co.jp> 0.1.5-1mdk
+- new release
+- remove two themes (incompatible to pekwm-0.1.5)
+
+* Mon Apr 17 2006 UTUMI Hirosi <utuhiro78@yahoo.co.jp> 0.1.4-1mdk
+- new release
+- remove Patch0 (pekwm-0.1.3-manpath.patch.bz2)
+- (merged upstream)
+- add requires xterm
+- modify config
+- add themes
+
+* Tue Jul 12 2005 Per Øyvind Karlsen <pkarlsen@mandriva.com> 0.1.3-4mdk
+- rebuild
+- fix summary-ended-with-dot
+- %%mkrel
+
+* Wed Jun 30 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 0.1.3-3mdk
+- rebuild for new g++
+
+* Wed Mar 24 2004 Per Øyvind Karlsen <peroyvind@linux-mandrake.com> 0.1.3-2mdk
+- fix permissions (reported by Chris Moore <chris.moore@mail.com>)
+
+* Mon Aug 18 2003 Per Øyvind Karlsen <peroyvind@linux-mandrake.com> 0.1.3-1mdk
+- initial mdk release
