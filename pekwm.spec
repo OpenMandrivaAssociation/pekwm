@@ -16,12 +16,12 @@ License:	GPL
 Group:		Graphical desktop/Other
 Summary:	A minimalist window manager for the X Window System
 Requires:	xterm
-BuildRequires:	libx11-devel
-BuildRequires:	libxext-devel
-BuildRequires:	libxft-devel
-BuildRequires:	libxinerama-devel
-BuildRequires:	libxpm-devel
-BuildRequires:	libxrandr-devel
+BuildRequires:	pkgconfig(x11)
+BuildRequires:	pkgconfig(xext)
+BuildRequires:	pkgconfig(xft)
+BuildRequires:	pkgconfig(xinerama)
+BuildRequires:	pkgconfig(xpm)
+BuildRequires:	pkgconfig(xrandr)
 BuildRequires:	jpeg-devel
 BuildRequires:	png-devel
 
