@@ -1,6 +1,6 @@
 Name:		pekwm
 Version:	0.1.12
-Release:	3
+Release:	4
 URL:		http://pekwm.org/
 Source0:	http://www.pekwm.org/projects/pekwm/files/%{name}-%{version}.tar.gz
 
