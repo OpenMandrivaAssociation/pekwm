@@ -1,7 +1,7 @@
 Name:		pekwm
 Version:	0.1.17
 Release:	1
-URL:		http://pekwm.org/
+URL:		https://pekwm.org/
 Source0:	https://www.pekwm.org/projects/pekwm/files/%{name}-%{version}.tar.bz2
 
 # modify config
